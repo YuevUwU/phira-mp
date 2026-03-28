@@ -74,6 +74,7 @@ impl TryFrom<TcpListener> for Server {
             }
             Err(e) => Err(e).with_context(|| format!("Failed to open {CONFIG_PATH}")),
         }?;
+        info!("User IDs allowed to monitor matches: {:?}", config.monitors);
         let state = Arc::new(ServerState {
             config,
             sessions: IdMap::default(),
